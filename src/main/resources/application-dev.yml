@@ -1,0 +1,56 @@
+logging:
+  level:
+    root: info
+    org.nutz: warn
+hikari:
+  primary:
+    jdbcUrl: jdbc:postgresql://139.9.230.107:12345/class_brand?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    username: zgtech
+    password: qweasd1234
+    driverClassName: org.postgresql.Driver
+  secondary:
+    jdbcUrl: jdbc:postgresql://139.9.230.107:12345/auth?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    username: zgtech
+    password: qweasd1234
+    driverClassName: org.postgresql.Driver
+spring:
+  aop:
+    auto: true
+    proxy-target-class: true
+  http:
+    encoding:
+      charset: utf-8
+      force: true
+      enabled: true
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+
+nutz:
+  json:
+    auto-unicode: false
+    quote-name: true
+    ignore-null: true
+    null-as-emtry: true
+    enabled: true
+    mode: compact
+  dao:
+    runtime:
+      create: true
+      migration: false
+      basepackage:
+       - com.xhw.springbootnutz.model.mapped
+       - BOOT-INF.classes.com.xhw.springbootnutz.model.mapped
+    sqlmanager:
+      paths:
+        - sqls
+server:
+  port: 8070
+
+minio:
+  endpoint: https://store.gzeducard.com
+  bucket: class-brand
+  accessKey: IHYP5MXHEA21W30MJDBZ
+  secretKey: 2nkQNKQAfJUIRABRtTQQuN255vHYnBOCvi3YACH9
+  backurl: https://store.gzeducard.com
