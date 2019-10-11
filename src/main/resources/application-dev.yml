@@ -2,18 +2,13 @@ logging:
   level:
     root: info
     org.nutz: warn
-hikari:
-  primary:
-    jdbcUrl: jdbc:postgresql://139.9.230.107:12345/class_brand?useUnicode=true&characterEncoding=UTF-8&useSSL=false
-    username: zgtech
-    password: qweasd1234
-    driverClassName: org.postgresql.Driver
-  secondary:
-    jdbcUrl: jdbc:postgresql://139.9.230.107:12345/auth?useUnicode=true&characterEncoding=UTF-8&useSSL=false
-    username: zgtech
-    password: qweasd1234
-    driverClassName: org.postgresql.Driver
 spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://192.168.29.128:3306/test1?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
   aop:
     auto: true
     proxy-target-class: true
@@ -26,6 +21,7 @@ spring:
     multipart:
       max-file-size: 100MB
       max-request-size: 100MB
+
 
 nutz:
   json:

@@ -11,11 +11,11 @@ import java.util.Date;
 import java.util.Map;
 
 /**
- * 日期工具
  *
- * @author Somer
- * @date 2018-04-16 15:54
- **/
+ * @Description: 日期工具
+ * @Author:         xhw
+ * @CreateDate:     2019-10-11 9:53
+ */
 public class DateUtils {
 
 

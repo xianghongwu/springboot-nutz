@@ -22,22 +22,10 @@ public class ShiroConfigure {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager);
         shiroFilterFactoryBean.setLoginUrl("/api/isLogin");//登录
-
-
         // 配置拦截链
         Map<String, String> filterChainDefinitionMap = Maps.newHashMap();
-        filterChainDefinitionMap.put("/login", "anon");
-        filterChainDefinitionMap.put("/token", "anon");
-        filterChainDefinitionMap.put("/api/isLogin", "anon");
-        filterChainDefinitionMap.put("/api/isMaster", "anon");
-        filterChainDefinitionMap.put("/favicon.ico", "anon");
-        filterChainDefinitionMap.put("/api/upload/**", "anon");
-        filterChainDefinitionMap.put("/css/**", "anon");
-        filterChainDefinitionMap.put("/bigData/**", "anon");
-        filterChainDefinitionMap.put("/api/login", "anon");//app登录
-        filterChainDefinitionMap.put("/app/**", "anon");//app请求
-        filterChainDefinitionMap.put("/openapi/**", "anon");//app请求
-        filterChainDefinitionMap.put("/**", "authc");
+        filterChainDefinitionMap.put("/login", "anon");//不拦截login请求
+        filterChainDefinitionMap.put("/**", "authc");//拦截所有请求
 
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;
