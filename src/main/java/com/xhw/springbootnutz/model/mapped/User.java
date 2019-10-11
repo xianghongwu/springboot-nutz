@@ -1,11 +1,14 @@
 package com.xhw.springbootnutz.model.mapped;
 
-import org.nutz.dao.entity.annotation.Column;
-import org.nutz.dao.entity.annotation.Comment;
-import org.nutz.dao.entity.annotation.Id;
-import org.nutz.dao.entity.annotation.Table;
+import lombok.Data;
+import org.nutz.dao.entity.annotation.*;
+import org.nutz.json.JsonField;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
 
 @Table("users")
+@Data
 public class User {
 
     @Id
@@ -19,27 +22,15 @@ public class User {
     @Column("password")
     private String password;
 
-    public Integer getId() {
-        return id;
-    }
+    @Column("height")
+    @Comment("身高")
+    @ColDefine(width = 15)
+    private Double height;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
+    @Column("register_time")
+    @org.nutz.dao.entity.annotation.Comment("注册时间")
+    @ColDefine(type = ColType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")//入参格式化
+    @JsonField(dataFormat = "yyyy-MM-dd")//出参格式化
+    private Date registerTime;
 }
