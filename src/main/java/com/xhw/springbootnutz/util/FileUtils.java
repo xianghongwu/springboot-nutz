@@ -18,8 +18,7 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * Created 徐守来 by 2018/3/28
- * Description:
+ *
  */
 @Component
 public class FileUtils {
