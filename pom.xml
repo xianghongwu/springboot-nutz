@@ -37,10 +37,22 @@
 		<poi.version>4.0.1</poi.version>
 		<easypoi.version>4.0.0</easypoi.version>
 		<lombok.version>1.18.4</lombok.version>
-
+		<jpush.version>3.3.9</jpush.version>
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>cn.hutool</groupId>
+			<artifactId>hutool-all</artifactId>
+			<version>5.4.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>cn.jpush.api</groupId>
+			<artifactId>jpush-client</artifactId>
+			<version>${jpush.version}</version>
+		</dependency>
+
 		<!--二维码-->
 		<dependency>
 			<groupId>com.google.zxing</groupId>

@@ -25,8 +25,7 @@ public class ResultUtils {
      */
     public static <T> List<T> getSqlList(Class<T> clazz, Dao dao, String sqlStr, Cnd cnd, Pager pager) {
         Sql sql = dao.sqls().create(sqlStr);
-        sql.params().set("pageNumber", ((pager.getPageNumber()) - 1) * pager.getPageSize());
-        sql.params().set("pageSize", pager.getPageSize());
+        sql.setPager(pager);
         sql.setCondition(cnd);
         sql.setCallback(Sqls.callback.entities());
         Entity<T> entity = dao.getEntity(clazz);
@@ -183,8 +182,7 @@ public class ResultUtils {
                 sql.setParam(params.getKey(), params.getValue());
             }
         }
-        sql.params().set("pageNumber", ((pager.getPageNumber()) - 1) * pager.getPageSize());
-        sql.params().set("pageSize", pager.getPageSize());
+        sql.setPager(pager);
         sql.setCondition(cnd);
         sql.setCallback(Sqls.callback.entities());
         Entity<T> entity = dao.getEntity(clazz);
@@ -292,8 +290,7 @@ public class ResultUtils {
                 sql.setVar(params.getKey(), params.getValue());
             }
         }
-        sql.params().set("pageNumber", ((pager.getPageNumber()) - 1) * pager.getPageSize());
-        sql.params().set("pageSize", pager.getPageSize());
+        sql.setPager(pager);
         //sql.setCondition(cnd);
         sql.setCallback(Sqls.callback.entities());
         Entity<T> entity = dao.getEntity(clazz);
@@ -360,8 +357,7 @@ public class ResultUtils {
         for (Map.Entry<String, Object> param : params.entrySet()) {
             sql.setParam(param.getKey(), param.getValue());
         }
-        sql.params().set("pageNumber", ((pager.getPageNumber()) - 1) * pager.getPageSize());
-        sql.params().set("pageSize", pager.getPageSize());
+        sql.setPager(pager);
         sql.setCallback(Sqls.callback.entities());
         Entity<T> entity = dao.getEntity(clazz);
         sql.setEntity(entity);

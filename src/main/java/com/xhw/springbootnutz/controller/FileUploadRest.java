@@ -1,7 +1,7 @@
 package com.xhw.springbootnutz.controller;
 
+import com.xhw.springbootnutz.model.dto.ajax.AjaxCode;
 import com.xhw.springbootnutz.model.dto.ajax.AjaxResult;
-import com.xhw.springbootnutz.model.dto.ajax.ResultState;
 import com.xhw.springbootnutz.model.dto.file.UploadInfo;
 import com.xhw.springbootnutz.util.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,13 +32,13 @@ public class FileUploadRest {
     @CrossOrigin
     public AjaxResult uploadFile(@RequestParam("file") MultipartFile file) {
         if (null == file) {
-            return new AjaxResult(ResultState.CONTENT_ERROR, "文件不存在!");
+            return new AjaxResult(AjaxCode.CONTENT_ERROR, "文件不存在!");
         } else {
             UploadInfo info = fileUpload.uploadFile(file);
             if (null == info) {
-                return new AjaxResult(ResultState.FAIL, "文件上传失败!");
+                return new AjaxResult(AjaxCode.FAIL, "文件上传失败!");
             } else {
-                return new AjaxResult(ResultState.OK, "上传成功!", info);
+                return new AjaxResult(AjaxCode.SUCCESS, "上传成功!", info);
             }
         }
     }
@@ -53,13 +53,13 @@ public class FileUploadRest {
     @CrossOrigin
     public AjaxResult uploadFileList(@RequestParam("files") MultipartFile[] files) {
         if (null == files || files.length < 1) {
-            return new AjaxResult(ResultState.CONTENT_ERROR, "文件不存在!");
+            return new AjaxResult(AjaxCode.CONTENT_ERROR, "文件不存在!");
         } else {
             List<UploadInfo> infoList = fileUpload.uploadFileList(files);
             if (null == infoList || infoList.size() < 1) {
-                return new AjaxResult(ResultState.FAIL, "文件上传失败!");
+                return new AjaxResult(AjaxCode.FAIL, "文件上传失败!");
             } else {
-                return new AjaxResult(ResultState.OK, "上传成功!", infoList);
+                return new AjaxResult(AjaxCode.SUCCESS, "上传成功!", infoList);
             }
         }
     }

@@ -1,5 +1,8 @@
 package com.xhw.springbootnutz.model.dto.ajax;
 
+import com.xhw.springbootnutz.exception.AddException;
+import com.xhw.springbootnutz.exception.UpdateException;
+
 /**
  * @Description:
  * @Author:         xhw
@@ -8,38 +11,46 @@ package com.xhw.springbootnutz.model.dto.ajax;
 public class AjaxResultUtils {
 
     public static <T> AjaxResult resultMessage(String message) {
-        return new AjaxResult(ResultState.CONTENT_ERROR, ResultState.CONTENT_ERROR_MESSAGE, message);
+        return new AjaxResult(AjaxCode.CONTENT_ERROR, AjaxCode.CONTENT_ERROR_MESSAGE, message);
     }
 
     public static <T> AjaxResult addMessage(T t) {
         if (null != t) {
-            return new AjaxResult(ResultState.OK, ResultState.ADD_SUCCESS, t);
+            return new AjaxResult(AjaxCode.SUCCESS, AjaxCode.ADD_SUCCESS, t);
         } else {
-            return new AjaxResult(ResultState.INNER_ERROR, ResultState.INNER_ERROR_MESSAGE, t);
+            throw new AddException(AjaxCode.ADD_EXCEPTION);
         }
     }
 
     public static <T> AjaxResult updateMessage(T t) {
         if (null != t) {
-            return new AjaxResult(ResultState.OK, ResultState.UPDATE_SUCCESS, t);
+            return new AjaxResult(AjaxCode.SUCCESS, AjaxCode.UPDATE_SUCCESS, t);
         } else {
-            return new AjaxResult(ResultState.INNER_ERROR, ResultState.INNER_ERROR_MESSAGE, t);
+            throw new UpdateException(AjaxCode.UPDATE_EXCEPTION);
         }
     }
 
     public static <T> AjaxResult getInfoMessage(T t) {
         if (null != t) {
-            return new AjaxResult(ResultState.OK, ResultState.GET_SUCCESS, t);
+            return new AjaxResult(AjaxCode.SUCCESS, AjaxCode.GET_SUCCESS, t);
         } else {
-            return new AjaxResult(ResultState.CONTENT_ERROR, ResultState.NO_DATA);
+            return new AjaxResult(AjaxCode.CONTENT_ERROR, AjaxCode.NO_DATA);
+        }
+    }
+
+    public static <T> AjaxResult getInfoMessage(T t,Integer total) {
+        if (null != t) {
+            return new AjaxResult(AjaxCode.SUCCESS, AjaxCode.GET_SUCCESS, t,total);
+        } else {
+            return new AjaxResult(AjaxCode.CONTENT_ERROR, AjaxCode.NO_DATA);
         }
     }
 
     public static AjaxResult delInfoMessage(boolean flag) {
         if (flag) {
-            return new AjaxResult(ResultState.OK, ResultState.DELETE_SUCCESS);
+            return new AjaxResult(AjaxCode.SUCCESS, AjaxCode.DELETE_SUCCESS);
         } else {
-            return new AjaxResult(ResultState.CONTENT_ERROR, ResultState.CONTENT_ERROR_MESSAGE);
+            throw new AddException(AjaxCode.DELETE_EXCEPTION);
         }
     }
 }

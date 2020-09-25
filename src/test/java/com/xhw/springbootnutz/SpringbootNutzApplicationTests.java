@@ -7,6 +7,7 @@ import com.xhw.springbootnutz.model.dto.StudentInfo;
 import com.xhw.springbootnutz.model.dto.StudentInfoDto;
 import com.xhw.springbootnutz.model.mapped.PrimaryStudent;
 import com.xhw.springbootnutz.model.mapped.StudentInfoDtoTemp;
+import com.xhw.springbootnutz.util.PrUtil;
 import com.xhw.springbootnutz.util.QRCodeUtils;
 import com.xhw.springbootnutz.util.StringUtils;
 import org.junit.Test;
@@ -14,13 +15,17 @@ import org.junit.runner.RunWith;
 import org.nutz.dao.Cnd;
 import org.nutz.dao.Dao;
 import org.nutz.dao.Sqls;
+import org.nutz.dao.entity.Record;
 import org.nutz.dao.sql.Sql;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.File;
+import java.sql.Types;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -179,6 +184,19 @@ public class SpringbootNutzApplicationTests {
 			}
 		}
 		System.out.println("一共修改了"+i+"个序列的值");
+	}
+
+	@Test
+	public void pr_person_code_get(String schoolId){
+		//存储过程获取人员编号
+		Map<String, Object> map_getno=new HashMap<>();
+		//这个是输入参数
+		map_getno.put("p_school_id",schoolId);
+
+		//这个是输出参数    因为postgresql11存储过程输出参数只有 INOUT类型
+		map_getno.put("p_result_code","-1");
+		map_getno.put("OUTp_result_code",Types.VARCHAR);
+		Record record_getno = PrUtil.callPrOut("call pr_person_code_get(@p_school_id,@p_result_code,@OUTp_result_code)", map_getno, dao);
 	}
 
 }

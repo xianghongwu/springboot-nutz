@@ -1,13 +1,14 @@
 package com.xhw.springbootnutz.function.dao.base.impl;
 
-import com.xhw.springbootnutz.function.dao.base.BaseDao;
 import com.xhw.springbootnutz.function.dao.base.IBaseOperate;
 import com.xhw.springbootnutz.function.dao.base.ResultUtils;
 import com.xhw.springbootnutz.model.dto.ajax.*;
 import com.xhw.springbootnutz.util.CndType;
 import com.xhw.springbootnutz.util.FunctionUtils;
 import org.nutz.dao.Cnd;
+import org.nutz.dao.Dao;
 import org.nutz.dao.pager.Pager;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,8 +22,10 @@ import java.util.Map;
  **/
 
 @Service
-public class BaseOperate extends BaseDao implements IBaseOperate {
+public class BaseOperate implements IBaseOperate {
 
+    @Autowired
+    Dao dao;
     @Override
     public AjaxResult add(Object object) {
         return AjaxResultUtils.addMessage(null != dao.insert(object) ? object : null);
@@ -45,7 +48,6 @@ public class BaseOperate extends BaseDao implements IBaseOperate {
 
     @Override
     public AjaxResult getPager(Map<String, CndType> params, String sql, Class<?> clazz, Pager pager) {
-        PageResultData<Object> resultData = new PageResultData<>();
         Cnd cnd = null;
         if (null != params) {
             cnd = FunctionUtils.MapToCnd(params);
@@ -58,19 +60,13 @@ public class BaseOperate extends BaseDao implements IBaseOperate {
         } else {
             list = ResultUtils.getSqlList(clazz, dao, sql, cnd, pager);
             String sqlSize = sql.substring(0, sql.indexOf(".")).concat(".totalSize");
-            totalNumber = ResultUtils.getSql(TotalCount.class, dao, sqlSize, cnd).getTotalNumber();
+            totalNumber = ResultUtils.getSql(AjaxResult.class, dao, sqlSize, cnd).getTotal();
         }
-        if (null != list && list.size() > 0) {
-            resultData.setTotal(totalNumber);
-            resultData.setRow(list);
-            return AjaxResultUtils.getInfoMessage(resultData);
-        }
-        return new AjaxResult(ResultState.CONTENT_ERROR, ResultState.NO_DATA);
+        return AjaxResultUtils.getInfoMessage(list,totalNumber);
     }
 
     @Override
     public AjaxResult getPagerCnd(Map<String, CndType> params, String sql, Class<?> clazz, Pager pager, Map<String, Object> condition) {
-        PageResultData<Object> resultData = new PageResultData<>();
         Cnd cnd = null;
         if (null != params) {
             cnd = FunctionUtils.MapToCnd(params);
@@ -83,19 +79,13 @@ public class BaseOperate extends BaseDao implements IBaseOperate {
         } else {
             list = ResultUtils.getSqlList(clazz, dao, sql, cnd, pager, condition);
             String sqlSize = sql.substring(0, sql.indexOf(".")).concat(".totalSize");
-            totalNumber = ResultUtils.getSql(TotalCount.class, dao, sqlSize, cnd, condition).getTotalNumber();
+            totalNumber = ResultUtils.getSql(AjaxResult.class, dao, sqlSize, cnd, condition).getTotal();
         }
-        if (null != list && list.size() > 0) {
-            resultData.setRow(list);
-            resultData.setTotal(totalNumber);
-            return AjaxResultUtils.getInfoMessage(resultData);
-        }
-        return new AjaxResult(ResultState.CONTENT_ERROR, ResultState.NO_DATA);
+        return AjaxResultUtils.getInfoMessage(list,totalNumber);
     }
 
     @Override
     public AjaxResult getPagerCnd(Map<String, CndType> params, String sql, Class<?> clazz, Pager pager, Map<String, Object> condition, Map<String,Object> conditionValue) {
-        PageResultData<Object> resultData = new PageResultData<>();
         Cnd cnd = null;
         if (null != params) {
             cnd = FunctionUtils.MapToCnd(params);
@@ -109,14 +99,9 @@ public class BaseOperate extends BaseDao implements IBaseOperate {
             list= ResultUtils.getSqlList(clazz, dao, sql, cnd,pager, condition, conditionValue);
             //list = ResultUtils.getSqlList(clazz, dao, sql, cnd, pager, condition);
             String sqlSize = sql.substring(0, sql.indexOf(".")).concat(".totalSize");
-            totalNumber = ResultUtils.getSql(TotalCount.class, dao, sqlSize, cnd, condition).getTotalNumber();
+            totalNumber = ResultUtils.getSql(AjaxResult.class, dao, sqlSize, cnd, condition).getTotal();
         }
-        if (null != list && list.size() > 0) {
-            resultData.setRow(list);
-            resultData.setTotal(totalNumber);
-            return AjaxResultUtils.getInfoMessage(resultData);
-        }
-        return new AjaxResult(ResultState.CONTENT_ERROR, ResultState.NO_DATA);
+        return AjaxResultUtils.getInfoMessage(list,totalNumber);
     }
 
     @Override
@@ -150,9 +135,9 @@ public class BaseOperate extends BaseDao implements IBaseOperate {
             list = ResultUtils.getSqlListNoPager(clazz, dao, sql, cnd);
         }
         if (null != list && list.size() > 0) {
-            return new AjaxResult(ResultState.OK, ResultState.GET_SUCCESS, list);
+            return new AjaxResult(AjaxCode.SUCCESS, AjaxCode.GET_SUCCESS, list);
         } else {
-            return new AjaxResult(ResultState.CONTENT_ERROR, ResultState.NO_DATA);
+            return new AjaxResult(AjaxCode.CONTENT_ERROR, AjaxCode.NO_DATA);
         }
     }
 
@@ -161,9 +146,9 @@ public class BaseOperate extends BaseDao implements IBaseOperate {
         Cnd cnd = FunctionUtils.MapToCnd(params);
         List list = ResultUtils.getSqlList(clazz, dao, sql, cnd, condition);
         if (null != list && list.size() > 0) {
-            return new AjaxResult(ResultState.OK, ResultState.GET_SUCCESS, list);
+            return new AjaxResult(AjaxCode.SUCCESS, AjaxCode.GET_SUCCESS, list);
         } else {
-            return new AjaxResult(ResultState.CONTENT_ERROR, ResultState.NO_DATA);
+            return new AjaxResult(AjaxCode.CONTENT_ERROR, AjaxCode.NO_DATA);
         }
     }
 

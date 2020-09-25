@@ -1,11 +1,14 @@
 package com.xhw.springbootnutz.model.dto.ajax;
 
 
+import lombok.Data;
+
 /**
 * @Description:
 * @Author:         xhw
 * @CreateDate:     2019-10-11 9:53
 */
+@Data
 public class AjaxResult {
 
     private Integer code;
@@ -14,6 +17,10 @@ public class AjaxResult {
 
     private Object data;
 
+    /**
+     * 数据总条数
+     */
+    private Integer total;
 
     public AjaxResult() {
     }
@@ -29,27 +36,12 @@ public class AjaxResult {
         this.data = data;
     }
 
-    public Integer getCode() {
-        return code;
-    }
-
-    public void setCode(Integer code) {
+    public AjaxResult(Integer code, String message, Object data,Integer total) {
         this.code = code;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
         this.message = message;
-    }
-
-    public Object getData() {
-        return data;
-    }
-
-    public void setData(Object data) {
         this.data = data;
+        this.total = total;
     }
+
+
 }

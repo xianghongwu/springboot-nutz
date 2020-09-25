@@ -2,10 +2,6 @@ package com.xhw.springbootnutz.util;
 
 import cn.afterturn.easypoi.excel.ExcelImportUtil;
 import cn.afterturn.easypoi.excel.entity.ImportParams;
-import com.xhw.springbootnutz.model.dto.ajax.AjaxResult;
-import com.xhw.springbootnutz.model.dto.ajax.ResultState;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;

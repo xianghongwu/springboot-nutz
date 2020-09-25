@@ -50,3 +50,7 @@ minio:
   accessKey: IHYP5MXHEA21W30MJDBZ
   secretKey: 2nkQNKQAfJUIRABRtTQQuN255vHYnBOCvi3YACH9
   backurl: https://store.gzeducard.com
+
+jpush:
+  appKey: 959f8f408474be4392de31ee
+  masterSecret: f4fa3c3259ca9806d6b7354d
