@@ -7,7 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
-@Table("users")
+@Table("ic_users")
 @Data
 public class User {
 
