@@ -30,7 +30,7 @@
 		<nutz.version>1.r.66</nutz.version>
 		<jtw.version>0.9.0</jtw.version>
 		<guava.version>24.1-jre</guava.version>
-		<shiro.version>1.4.0</shiro.version>
+		<shiro.version>1.7.1</shiro.version>
 		<apache.common.version>3.7</apache.common.version>
 		<minio.version>3.0.12</minio.version>
 		<jxl.version>2.6.12</jxl.version>
