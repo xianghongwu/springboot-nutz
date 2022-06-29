@@ -34,7 +34,7 @@
 		<apache.common.version>3.7</apache.common.version>
 		<minio.version>3.0.12</minio.version>
 		<jxl.version>2.6.12</jxl.version>
-		<poi.version>4.0.1</poi.version>
+		<poi.version>4.1.1</poi.version>
 		<easypoi.version>4.0.0</easypoi.version>
 		<lombok.version>1.18.4</lombok.version>
 
